@@ -29,6 +29,8 @@ function scoreUpdate(event) {
     for (i = 0; i < 4; i++) {
         let checked = listEl.children[i].children[0].checked;
         console.log(checked);
+        if (checked = true) {
+        }
         // if checked true, save label textcontent. make variable
         // replace event.target with variable
     }
@@ -77,10 +79,7 @@ const changeQuestion = function () {
 
 startBtn.addEventListener(`click`, startQuiz);
 nextBtn.textContent = `Next`;
-// nextBtn.addEventListener(`click`, nextQuestion)
-// nextBtn.addEventListener(`click`, changeQuestion);
 nextBtn.addEventListener(`click`, scoreUpdate);
-// changeQuestion()
 
 
 
