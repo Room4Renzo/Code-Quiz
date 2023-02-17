@@ -1,27 +1,27 @@
 let questionPool = [
     {   
-        question: `Question One`,
-        answers: [`a`, `b`, `c`, `d`],
-        correct: `a`
+        question: `Which of the following is used to declare a variable in JavaScript?`,
+        answers: [`var`, `variable`, `Var`, `v`],
+        correct: `var`
     },
     {   
-        question: `Question Two`,
-        answers: [`a`, `b`, `c`, `d`],
-        correct: `a`
+        question: `Which of the following symbols is used for comments in JavaScript?`,
+        answers: [`||`, `\\`, `/*`, `//`],
+        correct: `//`
     },
     {   
-        question: `Question Three`,
-        answers: [`a`, `b`, `c`, `d`],
-        correct: `a`
+        question: `Which of he follwing denotes an array?`,
+        answers: [`{}`, `()`, `[]`, `" "`],
+        correct: `[]`
     },
     {   
-        question: `Question Four`,
-        answers: [`a`, `b`, `c`, `d`],
-        correct: `a`
+        question: `Which of the following keywords is used to declare a function in JavaScript?`,
+        answers: [`function`, `f`, `func`, `funct`],
+        correct: `function`
     },
     {   
-        question: `Question Five`,
-        answers: [`a`, `b`, `c`, `d`],
-        correct: `a`
+        question: `Which of the following symbols is used to concatenate two strings in JavaScript?`,
+        answers: [`$`, `+`, `&`, `*`],
+        correct: `+`
     },
 ]

@@ -28,7 +28,7 @@ let x = 0
 
 function scoreUpdate() {
 
-    let radioAnswer =listEl.children[x].children[0];
+    let radioAnswer =listEl.children[0].children[0];
 
     for (i = 0; i < 4; i++) {
 
@@ -36,21 +36,25 @@ function scoreUpdate() {
         let correctAnswer = radioAnswer.nextSibling.innerHTML;
 
         if (checked === true) { 
+            localStorage.setItem(`correctAnswer`, correctAnswer);
             console.log(correctAnswer);
-            // checkAnswer(event)
-        };
-
-        
-        if (questionPool[x].correct = correctAnswer) {
-            
-            console.log(`rightANSWER`)
         } else {
-            console.log(`Wrong!!`)
+            console.log(`nope`)
         }
-        
-        x++;
 
-    } qIndex++
+        
+        
+        
+    } 
+    let correctAnswer = localStorage.getItem(`correctAnswer`);
+    if (questionPool[x].correct === correctAnswer) {
+        
+        console.log(`rightANSWER`)
+    } else {
+        console.log(`Wrong!!`)
+    }
+    x++;
+    qIndex++
     changeQuestion()
     };
 
