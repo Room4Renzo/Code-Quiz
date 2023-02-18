@@ -26,51 +26,40 @@ let qIndex = 0;
 let highscore = 0
 let x = 0
 
-function scoreUpdate() {
+function scoreUpdate(event) {
 
-    let radioAnswer =listEl.children[0].children[0];
+    let radioAnswer = listEl.children[0].children[0];
+    let inputEl = event.target;
+    let userAnswer = inputEl.nextSibling.textContent;
+    let correctAnswer = questionPool[x].correct;
 
     for (i = 0; i < 4; i++) {
 
-        let checked = radioAnswer.checked;
-        let correctAnswer = radioAnswer.nextSibling.textContent;
-
-        if (checked === true) { 
-            localStorage.setItem(`correctAnswer`, correctAnswer);
-            console.log(correctAnswer);
+        if (userAnswer === correctAnswer) { 
+            console.log(`Good Job!`);
         } else {
             console.log(`nope`)
-        }
-
-        
-        
-        
-    } 
-    let correctAnswer = localStorage.getItem(`correctAnswer`);
-    if (questionPool[x].correct === correctAnswer) {
-        
-        console.log(`rightANSWER`)
-    } else {
-        console.log(`Wrong!!`)
+        } 
     }
+
+    if (qIndex === questionPool.length - 1) {
+        endQuiz();
+    } else {
+        changeQuestion();
+    }
+
     x++;
     qIndex++
-    // changeQuestion()
+    // highscore += 10;
     };
 
 function checkAnswer(event) {
         
 }
 
-// let chooseQuestion = function () {
-//     for (i = 0; i < questionPool.length; i++)
-//         return i;
-// }
-
-function startQuiz(event) {
+const startQuiz = function(event) {
     startScreen.setAttribute(`class`, `hide`);
     questions.className = ``;
-    // display question seperately
     changeQuestion();
 }
 
@@ -99,14 +88,11 @@ const changeQuestion = function () {
     return;
 };
 
+function endQuiz() {
+    questions.setAttribute(`class`, `hide`);
+    gameOver.className = ``;
+}
+
 startBtn.addEventListener(`click`, startQuiz);
 nextBtn.textContent = `Next`;
 nextBtn.addEventListener(`click`, changeQuestion);
-
-
-
-
-
-// function mainQuiz() {
-
-// }
