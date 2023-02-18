@@ -26,21 +26,41 @@ let qIndex = 0;
 let highscore = 0
 let x = 0
 
+// function scoreUpdate(event) {
+//     event.preventDefault();
+
+//     let radioAnswer = listEl.children[0].children[0];
+//     let inputEl = event.target;
+//     inputEl.setAttribute(`checked`, `checked`);
+//     let userAnswer = inputEl.nextSibling.textContent;
+//     let correctAnswer = questionPool[x].correct;
+
+
+//         if (userAnswer === correctAnswer) { 
+//             console.log(`Good Job!`);
+//         } else {
+//             console.log(`nope`)
+//         } 
+
+//     if (qIndex === questionPool.length - 1) {
+//         endQuiz();
+//     } else {
+//         changeQuestion();
+//     }
+
+//     x++;
+//     qIndex++
+//     };
+
 function scoreUpdate(event) {
-
-    let radioAnswer = listEl.children[0].children[0];
     let inputEl = event.target;
-    let userAnswer = inputEl.nextSibling.textContent;
-    let correctAnswer = questionPool[x].correct;
-
-    for (i = 0; i < 4; i++) {
-
-        if (userAnswer === correctAnswer) { 
+    let userAnswer = inputEl.label;  
+    let correctAnswer = questionPool[x].correct;  
+    if (userAnswer === correctAnswer) {
             console.log(`Good Job!`);
         } else {
             console.log(`nope`)
         } 
-    }
 
     if (qIndex === questionPool.length - 1) {
         endQuiz();
@@ -96,3 +116,4 @@ function endQuiz() {
 startBtn.addEventListener(`click`, startQuiz);
 nextBtn.textContent = `Next`;
 nextBtn.addEventListener(`click`, changeQuestion);
+nextBtn.addEventListener(`click`, scoreUpdate);
