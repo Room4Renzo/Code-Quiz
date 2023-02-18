@@ -33,7 +33,7 @@ function scoreUpdate() {
     for (i = 0; i < 4; i++) {
 
         let checked = radioAnswer.checked;
-        let correctAnswer = radioAnswer.nextSibling.innerHTML;
+        let correctAnswer = radioAnswer.nextSibling.textContent;
 
         if (checked === true) { 
             localStorage.setItem(`correctAnswer`, correctAnswer);
@@ -55,7 +55,7 @@ function scoreUpdate() {
     }
     x++;
     qIndex++
-    changeQuestion()
+    // changeQuestion()
     };
 
 function checkAnswer(event) {
@@ -83,6 +83,7 @@ const changeQuestion = function () {
         let radioBtn = document.createElement(`input`);
         let radioLabel = document.createElement(`label`);
         let radioDiv = document.createElement(`div`);
+        radioBtn.addEventListener(`click`, scoreUpdate);
         
         questionTitle.textContent = questionPool[qIndex].question;
         radioLabel.textContent = questionPool[qIndex].answers[i];
@@ -100,7 +101,7 @@ const changeQuestion = function () {
 
 startBtn.addEventListener(`click`, startQuiz);
 nextBtn.textContent = `Next`;
-nextBtn.addEventListener(`click`, scoreUpdate);
+nextBtn.addEventListener(`click`, changeQuestion);
 
 
 
