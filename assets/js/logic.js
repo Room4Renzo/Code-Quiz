@@ -6,114 +6,99 @@ const choices = document.querySelector(`#choices`);
 const gameOver = document.querySelector(`#end-screen`);
 const nextBtn = document.createElement(`button`);
 const listEl = document.createElement(`ol`);
+const time = document.querySelector(`#time`);
+const initials = document.querySelector(`#initials`);
+const submit = document.querySelector(`#submit`);
+const highScores = document.querySelector(`#highscores`);
+
 
 choices.append(listEl);
 
-// const questionTimer = function () {
-//     setInterval(function(){
-//         time--
-//         // queryselector time (line 15) = time variable
-//         // if time 0 endgame
-//     }, 1000)
-
-// }
-
-// let time = 60
-
-
 //  Initialize globally used variables
+let countdown = time.innerHTML;
 let qIndex = 0;
-let highscore = 0
-let x = 0
+let score = 0;
+let highscore = 0;
+let highScoreStorage = [{}];
+let x = 0;
 
-// function scoreUpdate(event) {
-//     event.preventDefault();
-
-//     let radioAnswer = listEl.children[0].children[0];
-//     let inputEl = event.target;
-//     inputEl.setAttribute(`checked`, `checked`);
-//     let userAnswer = inputEl.nextSibling.textContent;
-//     let correctAnswer = questionPool[x].correct;
-
-
-//         if (userAnswer === correctAnswer) { 
-//             console.log(`Good Job!`);
-//         } else {
-//             console.log(`nope`)
-//         } 
-
-//     if (qIndex === questionPool.length - 1) {
-//         endQuiz();
-//     } else {
-//         changeQuestion();
-//     }
-
-//     x++;
-//     qIndex++
-//     };
-
-function scoreUpdate(event) {
-    let inputEl = event.target;
-    let userAnswer = inputEl.label;  
-    let correctAnswer = questionPool[x].correct;  
-    if (userAnswer === correctAnswer) {
-            console.log(`Good Job!`);
+const questionTimer = function () {
+    setInterval(function () {
+        if (countdown === 0) {
+            endQuiz();
         } else {
-            console.log(`nope`)
-        } 
+            countdown--;
+            time.innerHTML = countdown;
+        }
+    }, 1000)
 
-    if (qIndex === questionPool.length - 1) {
-        endQuiz();
-    } else {
-        changeQuestion();
-    }
-
-    x++;
-    qIndex++
-    // highscore += 10;
-    };
-
-function checkAnswer(event) {
-        
 }
 
-const startQuiz = function(event) {
+
+const startQuiz = function (event) {
     startScreen.setAttribute(`class`, `hide`);
     questions.className = ``;
+    countdown = 60
+    questionTimer();
     changeQuestion();
-}
+};
 
 const changeQuestion = function () {
-
-    listEl.innerHTML = ``
+    listEl.innerHTML = ``;
 
     for (let i = 0; i < 4; i++) {
-
         let radioBtn = document.createElement(`input`);
         let radioLabel = document.createElement(`label`);
         let radioDiv = document.createElement(`div`);
-        radioBtn.addEventListener(`click`, scoreUpdate);
-        
+
         questionTitle.textContent = questionPool[qIndex].question;
         radioLabel.textContent = questionPool[qIndex].answers[i];
 
         radioBtn.setAttribute(`type`, `radio`);
-        radioBtn.setAttribute(`name`, `radio`);
+        radioBtn.setAttribute(`name`, questionPool[qIndex].answers[i]);
+        radioBtn.setAttribute(`class`, `ansRadioBtn`);
 
         listEl.append(radioDiv);
         listEl.append(nextBtn);
         radioDiv.append(radioBtn);
         radioDiv.append(radioLabel);
-    };
+    }
+    qIndex++;
+
     return;
 };
 
 function endQuiz() {
     questions.setAttribute(`class`, `hide`);
     gameOver.className = ``;
+    countdown = 0;
+highScore = score;
+    localStorage.setItem(`highscore`, highscore);
 }
 
 startBtn.addEventListener(`click`, startQuiz);
 nextBtn.textContent = `Next`;
-nextBtn.addEventListener(`click`, changeQuestion);
-nextBtn.addEventListener(`click`, scoreUpdate);
+nextBtn.addEventListener(`click`, function (event) {
+    event.preventDefault();
+    let answer = document.querySelectorAll(`.ansRadioBtn`);
+    for (let i = 0; i < answer.length; i++) {
+        const choice = answer[i];
+        if (choice.checked) {
+            if (choice.name === questionPool[x].correct) {
+                console.log(`Good Job!`);
+                score += 10;
+                countdown += 5;
+            } else {
+                console.log(`nope`);
+                countdown -= 15;
+                score -= 5;
+            }
+        }
+    }
+    if (qIndex === questionPool.length) {
+        endQuiz();
+    } else {
+        changeQuestion();
+    }
+    x++;
+});
