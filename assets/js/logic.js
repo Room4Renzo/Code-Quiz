@@ -7,7 +7,7 @@ const gameOver = document.querySelector(`#end-screen`);
 const nextBtn = document.createElement(`button`);
 const listEl = document.createElement(`ol`);
 const time = document.querySelector(`#time`);
-const initials = document.getElementById(`#initials`).value;
+const initials = document.querySelector(`#initials`).value;
 const submit = document.querySelector(`#submit`);
 const highScores = document.querySelector(`#highscores`);
 
@@ -23,7 +23,7 @@ let highScore = score;
 let highScoreStorage = [
     {
         initials: ``,
-        highScore: highscore
+        highScore: highScore
     }
 ];
 let x = 0;
@@ -41,7 +41,7 @@ const questionTimer = function () {
 }
 
 
-const startQuiz = function (event) {
+const startQuiz = function () {
     startScreen.setAttribute(`class`, `hide`);
     questions.className = ``;
     countdown = 60
@@ -70,7 +70,6 @@ const changeQuestion = function () {
         radioDiv.append(radioLabel);
     }
     qIndex++;
-
     return;
 };
 
@@ -86,6 +85,7 @@ function endQuiz() {
 startBtn.addEventListener(`click`, startQuiz);
 
 nextBtn.textContent = `Next`;
+nextBtn.setAttribute(`class`, `btn btn-primary`);
 nextBtn.addEventListener(`click`, function (event) {
     event.preventDefault();
     let answer = document.querySelectorAll(`.ansRadioBtn`);
