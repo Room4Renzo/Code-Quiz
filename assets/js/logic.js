@@ -7,19 +7,25 @@ const gameOver = document.querySelector(`#end-screen`);
 const nextBtn = document.createElement(`button`);
 const listEl = document.createElement(`ol`);
 const time = document.querySelector(`#time`);
-const initials = document.querySelector(`#initials`);
+const initials = document.getElementById(`#initials`).value;
 const submit = document.querySelector(`#submit`);
 const highScores = document.querySelector(`#highscores`);
 
 
 choices.append(listEl);
 
+
 //  Initialize globally used variables
 let countdown = time.innerHTML;
 let qIndex = 0;
 let score = 0;
-let highscore = 0;
-let highScoreStorage = [{}];
+let highScore = score;
+let highScoreStorage = [
+    {
+        initials: ``,
+        highScore: highscore
+    }
+];
 let x = 0;
 
 const questionTimer = function () {
@@ -72,11 +78,13 @@ function endQuiz() {
     questions.setAttribute(`class`, `hide`);
     gameOver.className = ``;
     countdown = 0;
-highScore = score;
-    localStorage.setItem(`highscore`, highscore);
+    highScore = score;
+    localStorage.setItem(`highscoreStorage`, JSON.stringify(highScoreStorage));
+    console.log(highScoreStorage);
 }
 
 startBtn.addEventListener(`click`, startQuiz);
+
 nextBtn.textContent = `Next`;
 nextBtn.addEventListener(`click`, function (event) {
     event.preventDefault();
