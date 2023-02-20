@@ -7,9 +7,9 @@ const gameOver = document.querySelector(`#end-screen`);
 const nextBtn = document.createElement(`button`);
 const listEl = document.createElement(`ol`);
 const time = document.querySelector(`#time`);
-const initials = document.querySelector(`#initials`).value;
 const submit = document.querySelector(`#submit`);
 const highScores = document.querySelector(`#highscores`);
+let initials = document.querySelector(`#initials`).value;
 
 
 choices.append(listEl);
@@ -26,6 +26,7 @@ let highScoreStorage = [
         highScore: highScore
     }
 ];
+
 let x = 0;
 
 const questionTimer = function () {
@@ -50,6 +51,7 @@ const startQuiz = function () {
 };
 
 const changeQuestion = function () {
+
     listEl.innerHTML = ``;
 
     for (let i = 0; i < 4; i++) {
@@ -79,9 +81,7 @@ function endQuiz() {
     countdown = 0;
     highScore = score;
     localStorage.setItem(`highscoreStorage`, JSON.stringify(highScoreStorage));
-    console.log(highScoreStorage);
-}
-
+};
 startBtn.addEventListener(`click`, startQuiz);
 
 nextBtn.textContent = `Next`;
@@ -93,11 +93,9 @@ nextBtn.addEventListener(`click`, function (event) {
         const choice = answer[i];
         if (choice.checked) {
             if (choice.name === questionPool[x].correct) {
-                console.log(`Good Job!`);
                 score += 10;
                 countdown += 5;
             } else {
-                console.log(`nope`);
                 countdown -= 15;
                 score -= 5;
             }
@@ -109,4 +107,16 @@ nextBtn.addEventListener(`click`, function (event) {
         changeQuestion();
     }
     x++;
+});
+
+submit.addEventListener(`click`, function (event) {
+    event.preventDefault();
+
+    highScoreStorage.push({
+        initials: initials,
+        highScore: highScore
+    });
+    
+    localStorage.setItem(`highscoreStorage`, JSON.stringify(highScoreStorage));
+    window.location.href = `highscores.html`;
 });
