@@ -20,3 +20,11 @@ let displayHighScore = function () {
 };
 
 displayHighScore();
+
+const clearHighScore = document.querySelector(`#clear`);
+
+clearHighScore.addEventListener(`click`, function (event) {
+    event.preventDefault();
+    localStorage.clear();
+    highScore.innerHTML = ``;
+});
