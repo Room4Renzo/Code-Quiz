@@ -9,7 +9,6 @@ const listEl = document.createElement(`ol`);
 const time = document.querySelector(`#time`);
 const submit = document.querySelector(`#submit`);
 const highScores = document.querySelector(`#highscores`);
-let initials = document.querySelector(`#initials`).value;
 
 
 choices.append(listEl);
@@ -20,12 +19,6 @@ let countdown = time.innerHTML;
 let qIndex = 0;
 let score = 0;
 let highScore = score;
-let highScoreStorage = [
-    {
-        initials: ``,
-        highScore: highScore
-    }
-];
 
 let x = 0;
 
@@ -38,7 +31,7 @@ const questionTimer = function () {
             time.innerHTML = countdown;
         }
     }, 1000)
-
+    
 }
 
 
@@ -51,21 +44,21 @@ const startQuiz = function () {
 };
 
 const changeQuestion = function () {
-
+    
     listEl.innerHTML = ``;
-
+    
     for (let i = 0; i < 4; i++) {
         let radioBtn = document.createElement(`input`);
         let radioLabel = document.createElement(`label`);
         let radioDiv = document.createElement(`div`);
-
+        
         questionTitle.textContent = questionPool[qIndex].question;
         radioLabel.textContent = questionPool[qIndex].answers[i];
-
+        
         radioBtn.setAttribute(`type`, `radio`);
         radioBtn.setAttribute(`name`, questionPool[qIndex].answers[i]);
         radioBtn.setAttribute(`class`, `ansRadioBtn`);
-
+        
         listEl.append(radioDiv);
         listEl.append(nextBtn);
         radioDiv.append(radioBtn);
@@ -109,12 +102,24 @@ nextBtn.addEventListener(`click`, function (event) {
 });
 
 submit.addEventListener(`click`, function (event) {
+    
     event.preventDefault();
+    let initials = document.querySelector(`#initials`).value;
 
+    let highScoreStorage = [
+        {
+            initials: ``,
+            highScore: highScore
+        }
+    ];
+    
     highScoreStorage.push({
         initials: initials,
         highScore: highScore
     });
+
+    highScoreStorage.shift();
+    console.log(highScoreStorage)
     
     localStorage.setItem(`highscoreStorage`,JSON.stringify(highScoreStorage));
     window.location.href = `highscores.html`;
