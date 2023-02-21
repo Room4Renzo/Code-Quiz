@@ -1,11 +1,10 @@
 const highScore = document.querySelector(`#highScores`);
 let highScoreStorage = JSON.parse(localStorage.getItem(`highScoreStorage`));
 
-console.log(highScoreStorage[0])
 
 let displayHighScore = function () {
 
-    for (let i = 0; i < highScoreStorage.length; i++) {
+    for (let i = 0; i < 4; i++) {
 
         if (highScoreStorage === null || highScoreStorage === undefined) {
             return

@@ -80,7 +80,6 @@ function endQuiz() {
     gameOver.className = ``;
     countdown = 0;
     highScore = score;
-    localStorage.setItem(`highscoreStorage`, JSON.stringify(highScoreStorage));
 };
 startBtn.addEventListener(`click`, startQuiz);
 
@@ -117,6 +116,6 @@ submit.addEventListener(`click`, function (event) {
         highScore: highScore
     });
     
-    localStorage.setItem(`highscoreStorage`, JSON.stringify(highScoreStorage));
+    localStorage.setItem(`highscoreStorage`,JSON.stringify(highScoreStorage));
     window.location.href = `highscores.html`;
 });
