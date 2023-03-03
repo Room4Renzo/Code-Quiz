@@ -56,7 +56,7 @@ const changeQuestion = function () {
         radioLabel.textContent = questionPool[qIndex].answers[i];
         
         radioBtn.setAttribute(`type`, `radio`);
-        radioBtn.setAttribute(`name`, questionPool[qIndex].answers[i]);
+        radioBtn.setAttribute(`name`, questionPool[qIndex]);
         radioBtn.setAttribute(`class`, `ansRadioBtn`);
         
         listEl.append(radioDiv);
