@@ -88,7 +88,7 @@ nextBtn.addEventListener(`click`, function (event) {
                 score += 10;
                 countdown += 5;
             } else {
-                countdown -= 15;
+                countdown -= 10;
                 score -= 5;
             }
         }
