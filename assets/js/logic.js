@@ -43,6 +43,8 @@ const startQuiz = function () {
     changeQuestion();
 };
 
+
+// Function to create answer elements and populate with questions/answers from question pool
 const changeQuestion = function () {
     
     listEl.innerHTML = ``;
@@ -78,13 +80,17 @@ startBtn.addEventListener(`click`, startQuiz);
 
 nextBtn.textContent = `Next`;
 nextBtn.setAttribute(`class`, `btn btn-primary`);
+
+// Function/Event Listener attached to the next button that checks chosen answer, and changes score and timer accordingly
 nextBtn.addEventListener(`click`, function (event) {
     event.preventDefault();
     let answer = document.querySelectorAll(`.ansRadioBtn`);
+    let choiceLabel = document.querySelectorAll(`label`);
     for (let i = 0; i < answer.length; i++) {
         const choice = answer[i];
+        console.log(choiceLabel[i].textContent)
         if (choice.checked) {
-            if (choice.name === questionPool[x].correct) {
+            if (choiceLabel[i].textContent === questionPool[x].correct) {
                 score += 10;
                 countdown += 5;
             } else {
